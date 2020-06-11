@@ -1,0 +1,11 @@
+MGP_float_v0.1.1
+1. add parameter '--logML', '--logREML' for PAI algorithm
+2. add parameter '--NoSe' 
+3. change the format of merged binary kinship (weighted kinship)
+4. '.gz' file can be provided for parameter '--vcf' in subroutine 'pheno'
+5. add some error message
+6. improve the accuracy to deal with low rank matrix
+7. fix bugs: the program may crash if the value of the last parameter in command line was not given
+8. fix bugs: pvalue of the last window may be outputted repetitively  
+9. fix bugs: process of low rank matrix when more than one random effects are included in the mixed model
+10. fix bugs: phased genotype in vcf format may not be recognized
