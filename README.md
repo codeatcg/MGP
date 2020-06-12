@@ -2,11 +2,13 @@
 
 ## Description
 
-There are already a lot of softwares that can be used to perform genome wide association studies (GWAS) and genome prediction (GP) but some of them are not computationally efficient or difficulty to use. The objective of the project is to develop a versatile, efficient and easy-to-use tool for GWAS and GP. Genotype files in VCF format, commonly used in resequencing or TPED format are read in fragment. The efficient mixed-model implemented in GEMMA was improved. The algorithm, average information restricted maximum likelihood (AI-REML) used to estimate variance component was implemented in a more efficient way. Univariate and repeated-measured GWAS and genome prediction of additive and dominant effects can be performed easily.  
+There are already a lot of softwares that can be used to perform genome wide association studies (GWAS) and genome prediction (GP) but some of them are not computationally efficient or difficulty to use. The objective of the project is to develop a versatile, efficient and easy-to-use tool for GWAS and GP. Genotype files in VCF format, commonly used in resequencing or TPED format are read in fragment. The efficient mixed-model implemented in GEMMA was improved. The algorithm, average information restricted maximum likelihood (AI-REML) used to estimate variance component was implemented in a more efficient way. Univariate and repeated-measured GWAS and genome prediction of additive and dominant effects can be performed easily.
+
+**NOTE:** Please use the latest version (MGP_float_v0.1.1). It's more precise for low rank matrix (detail in ChangeLog).
 
 ## Version
 
-The program was written by C++ and compiled using gcc 4.4.7 on a 64-bit Linux version. MGP_float_v0.1.0 is the float version and genotypes are stored in a float. MGP_char_v0.1.0 is the character version and genotypes are stored in a character, which can save storage space and improve the speed of reading genotype files in GWAS. The float version can use the genotype and dosage information. But the character version can’t use the dosage information which is a float. Although the current version may not be computationally efficient for a trait that was measure repeatedly it is still fast for small sample and the more efficient algorithm implemented in the new version is being tested.  
+The program was written by C++ and compiled using gcc 4.4.7 on a 64-bit Linux version. MGP_float_v0.1.1 is the float version and genotypes are stored in a float. MGP_char_v0.1.0 (with some bugs, will be updated in spare time) is the character version and genotypes are stored in a character, which can save storage space and improve the speed of reading genotype files in GWAS. The float version can use the genotype and dosage information. But the character version can’t use the dosage information which is a float. Although the current version may be not computationally efficient for a trait that was measured repeatedly it is still fast for small sample size and the more efficient algorithm implemented in the new version is being tested.  
 
 ## Command and option
 
@@ -14,7 +16,6 @@ The program was written by C++ and compiled using gcc 4.4.7 on a 64-bit Linux ve
 
 Either complete or chunked genotype files can be used to build additive and dominant relationship. If chunked genotype files are used ‘merge’ command is needed to merge the binary intermediate relationship files. If there are missing genotypes they will be sampled from marginal distribution, randomly. If missing genotypes were imputed by more accurate methods e.g. beagle dosage information can be used. SNPs with minimal allele frequency close to zero will be removed.  
 
-    --in         FILE  input  
     --in         FILE  input file (genotype file).  
     --part             genotype is partial.  
     --outBin     FILE  output intermediate binary kinship (--part)  
@@ -25,7 +26,7 @@ Either complete or chunked genotype files can be used to build additive and domi
     --oFreq      FILE  output allele frequency product (p*q), in current version this parameter is unuseful.   
     --gType      CHAR  genotype or dosage  
     --kinType    CHAR  model to calculate genome relationship,add(additive),dom(dominance), by default: add  
-    --addMethod  INT   method to calculate additive genome relationship.(1 or 2)  
+    --addMethod  INT   method to calculate additive genome relationship (1 or 2). Method 1- formula according to Vanraden, method 2- similar to GCTA  
     --tped             plink format tped file  
     --rSnp       INT   number of snps kept in memory,by default: 1000 
 
@@ -53,9 +54,7 @@ For phenotype missing values must be represented by ‘NA’ and the first colum
     --inHeader   FILE   vcf file or vcf header file  
     --ogBin      FILE   output merged binary genotype.  
     --okBin      FILE   output merged binary kinship.  
-   
-
-
+    --okTxt      FILE   output merged kinship in text.
 
 
 **mix**　　　　　MGP mix [options]  
@@ -64,7 +63,7 @@ Perform GWAS and genome prediction/selection (GS). For univariate GWAS three alg
 
     --phenotype  FILE  phenotype file  
     --genotype   FILE  genotype file(binary),perform GWAS or weighted GS  　
-    --iFreq      FILE  allele frequency file(binary),perform weighted GWAS or weighted GS  　
+    --iFreq      FILE  allele frequency file(binary),perform weighted GWAS or weighted GS, not useful for current version  
     --kinAdd     FILE  additive relationship file(binary)  
     --kinDom     FILE  dominant relationship file(binary)  　
     --out        FILE  result file(p-value or breeding value)  
@@ -81,6 +80,9 @@ Perform GWAS and genome prediction/selection (GS). For univariate GWAS three alg
     --varIter    INT   the max number of iterations to estimate variance,by default 20  
     --tol        FLOAT convergence criteria,by default 1e-4  
     --rSnp       INT   number of SNPs kept in memory at a time(GWAS),by default 1000  
+    --logML            output log maximum likelihood of the model when PAI algorithm is used
+    --logREML          output log restricted maximum likelihood of the model when PAI algorithm is used
+    --NoSe             not output standard error of fix and random effects
 
 
 
@@ -104,7 +106,7 @@ Three columns: effects of SNPs, standard error, p value. Orders of SNPs are same
 
 #### GP output
 
-Class  Effect  EffectSe        Observe Predict Residual  
+\#Class  Effect  EffectSe        Observe Predict Residual  
 
 #### Stdout
 
@@ -112,7 +114,7 @@ The program will output information of running which include the information of 
 
 Yield = Mean + Rand_add + Rand_Row + Rand_Col + Rand_error  
 
-*********** Variance **********  
+\*********** Variance **********  
 Var: 803.311 849.447 197.807 2995.05  
 SE: 307.661 397.552 126.464 14.1251  
 \********************************   
@@ -128,5 +130,5 @@ Institute: Applied agriculture of BGI
 
 ## Licence
 
-Free for research. For commercial use please contact P_agro_pmo@genomics.cn.  
+Free for research. For commercial use please contact P_agro_pmo@genomics.cn  
 
