@@ -4,7 +4,7 @@
 
 There are already a lot of softwares that can be used to perform genome wide association studies (GWAS) and genome prediction (GP) but some of them are not computationally efficient or difficulty to use. The objective of the project is to develop a versatile, efficient and easy-to-use tool for GWAS and GP. Genotype files in VCF format, commonly used in resequencing or TPED format are read in fragment. The efficient mixed-model implemented in GEMMA was improved. The algorithm, average information restricted maximum likelihood (AI-REML) used to estimate variance component was implemented in a more efficient way. Univariate and repeated-measured GWAS and genome prediction of additive and dominant effects can be performed easily.
 
-**NOTE:** It's recommended to use version >= v0.1.1. They are more precise for low rank matrix (detail in ChangeLog).
+**NOTE:** It's recommended to use version >= v0.1.1. They are more precise for analysis involving low rank matrix (detail in ChangeLog).
 
 ## Version
 
