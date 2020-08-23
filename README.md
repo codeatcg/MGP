@@ -4,11 +4,13 @@
 
 There are already a lot of softwares that can be used to perform genome wide association studies (GWAS) and genome prediction (GP) but some of them are not computationally efficient or difficulty to use. The objective of the project is to develop a versatile, efficient and easy-to-use tool for GWAS and GP. Genotype files in VCF format, commonly used in resequencing or TPED format are read in fragment. The efficient mixed-model implemented in GEMMA was improved. The algorithm, average information restricted maximum likelihood (AI-REML) used to estimate variance component was implemented in a more efficient way. Univariate and repeated-measured GWAS and genome prediction of additive and dominant effects can be performed easily.
 
-**NOTE:** Please use the latest version (MGP_float_v0.1.1). It's more precise for low rank matrix (detail in ChangeLog).
+**NOTE:** It's recommended to use version >= v0.1.1. They are more precise for low rank matrix (detail in ChangeLog).
 
 ## Version
 
-The program was written by C++ and compiled using gcc 4.4.7 on a 64-bit Linux version. MGP_float_v0.1.1 is the float version and genotypes are stored in a float. MGP_char_v0.1.0 (with some bugs, will be updated in spare time) is the character version and genotypes are stored in a character, which can save storage space and improve the speed of reading genotype files in GWAS. The float version can use the genotype and dosage information. But the character version can’t use the dosage information which is a float. Although the current version may be not computationally efficient for a trait that was measured repeatedly it is still fast for small sample size and the more efficient algorithm implemented in the new version is being tested.  
+The program was written by C++ and compiled using gcc 4.4.7 on a 64-bit Linux version. MGP_float_v0.1.2 is the float version and genotypes are stored in a float. MGP_char_v0.1.0 (with some bugs, will be updated in spare time) is the character version and genotypes are stored in a character, which can save storage space and improve the speed of reading genotype files in GWAS. The float version can use the genotype and dosage information. But the character version can’t use the dosage information which is a float. Although the current version may be not computationally efficient for a trait that was measured repeatedly it is still fast for small sample size and the more efficient algorithm implemented in the new version is being tested.
+
+Starting from version 0.1.2 association analysis can be parallelized by two dimensions, by chromosome (chromosome segment) and by SNPs in one chromosome (chromosome segment). The number of threads used can be controlled by setting the value of the environment variable OMP_NUM_THREADS. For example, exploiting 2 cores, you can set OMP_NUM_THREADS=2 and then run the program MGP.
 
 ## Command and option
 
@@ -119,12 +121,23 @@ Var: 803.311 849.447 197.807 2995.05
 SE: 307.661 397.552 126.464 14.1251  
 \********************************   
 
-The order of ‘Var’ is consistent with the random effects in model.  
+The order of ‘Var’ is consistent with the random effects in model.
+
+## Example
+
+Test data and script to run the program can be found in folder v0.1.0. New parameters of MGP were not included in the script but it is easy to appended.
+
+## Dependency
+
+Eigen  
+boost  
+zlib  
 
 ## Contact
 
 If you find bugs please email me.  
-Email:  miaozepu@genomics.cn  
+Email:  miaozepu@genomics.cn (stopped)  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runzejiaoku@sina.com  
 Institute: Applied agriculture of BGI  
 
 
