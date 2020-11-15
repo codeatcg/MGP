@@ -14,10 +14,10 @@ Starting from version 0.1.2 association analysis can be parallelized by two dime
 
 ## Install
 
-\# downlad MGP_float_v0.1.3    
+\# download MGP_float_v0.1.3    
 chmod +x MGP_float_v0.1.3
 
-\# downlad MGP_float_MKL_v0.1.3.zip    
+\# download MGP_float_MKL_v0.1.3.zip    
 unzip MGP_float_MKL_v0.1.3.zip    
 chmod +x MGP_float_MKL_v0.1.3
 
