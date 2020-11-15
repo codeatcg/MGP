@@ -12,6 +12,15 @@ The program was written by C++ and compiled using gcc 6.4.0 on a 64-bit Linux ve
 
 Starting from version 0.1.2 association analysis can be parallelized by two dimensions, by chromosome (chromosome segment) and by SNPs in one chromosome (chromosome segment). The number of threads used can be controlled by setting the value of the environment variable OMP_NUM_THREADS (export OMP_NUM_THREADS=N). For example, exploiting 2 cores, you can set OMP_NUM_THREADS=2 and then run the program MGP.
 
+## Install
+
+\# downlad MGP_float_v0.1.3    
+chmod +x MGP_float_v0.1.3
+
+\# downlad MGP_float_MKL_v0.1.3.zip    
+unzip MGP_float_MKL_v0.1.3.zip    
+chmod +x MGP_float_MKL_v0.1.3
+
 ## Command and option
 
 **kin**　　　　 MGP kin [options]  
